@@ -93,6 +93,15 @@ const breakpoints = {
   xxl: 1400,
 };
 
+/*
+// can be defined also as:
+const breakpoints = {
+  small: 0,
+  middle: 800,
+  large: 1200,
+}
+*/
+
 const App = () => {
     return (
         <ResponsiveProvider breakpoints={breakpoints} breakpointsMax={breakpointsMax}>
