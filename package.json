@@ -1,6 +1,6 @@
 {
   "name": "@ramirezcgn/react-context-responsive",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "Fork of react-context-responsive, a responsive API using React's Context API",
   "license": "MIT",
   "keywords": [

@@ -18,11 +18,9 @@ const ResponsiveProvider = ({
 
     if (!mediaQueries) {
         breakpointNames = Object.entries(breakpoints)
-            .sort((a, b) => a[1] - b[1]).map(x => x[0])
-        mediaQueries = getMediaQueries(
-            breakpoints,
-            breakpointNames
-        );
+            .sort((a, b) => a[1] - b[1])
+            .map((x) => x[0]);
+        mediaQueries = getMediaQueries(breakpoints, breakpointNames);
     } else {
         breakpointNames = Object.keys(mediaQueries);
     }
