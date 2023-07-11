@@ -1,6 +1,7 @@
-[![license](https://img.shields.io/github/license/Farfetch/react-context-responsive)](LICENSE)
-![publish](https://github.com/Farfetch/React-Context-Responsive/workflows/Publish%20react-context-responsive/badge.svg)
+Fork of [react-context-responsive](https://github.com/Farfetch/react-context-responsive) with no restrictions of breakpoint names and other changes.
 
+[![license](https://img.shields.io/github/license/ramirezcgn/react-context-responsive)](LICENSE)
+![publish](https://github.com/ramirezgn/React-Context-Responsive/workflows/Publish%20react-context-responsive/badge.svg)
 
 # react-context-responsive
 
@@ -11,14 +12,14 @@ It has the same API of [`redux-responsive`](https://github.com/AlecAivazis/redux
 ## Installation
 
 ```bash
-$ yarn add @farfetch/react-context-responsive
-$ npm i @farfetch/react-context-responsive
+$ yarn add @ramirezcgn/react-context-responsive
+$ npm i @ramirezcgn/react-context-responsive
 ```
 
 ...and include it in your project
 
 ```js
-import { ResponsiveProvider, useResponsive } from '@farfetch/react-context-responsive';
+import { ResponsiveProvider, useResponsive } from '@ramirezcgn/react-context-responsive';
 ```
 
 ## Guidelines
@@ -27,7 +28,7 @@ import { ResponsiveProvider, useResponsive } from '@farfetch/react-context-respo
 
 The app, ideally, should have only one `<ResponsiveProvider>`, usually at `app.js`, wrapping all the components.
 
-You can have as much consumers (`useResponsive`, `useIsMobile`, `Responsive`, `withResponsive` and `withIsMobile`) as you need. When the Provider value changes, all the consumers will update.
+You can have as many consumers (`useResponsive`, `useIsMobile`, `Responsive`, `withResponsive` and `withIsMobile`) as you need. When the Provider value changes, all the consumers will update.
 
 ### Preferred consumers
 
@@ -35,36 +36,35 @@ The hooks (`useResponsive` and `useIsMobile`) are the preferred method of using 
 
 ### Mobile device detection
 
-When possible, use the `withIsMobile` and `useIsMobile` for mobile devices detection. In the future we might use it to automatically splitting of mobile-only code.
+When possible, use the `withIsMobile` and `useIsMobile` for mobile device's detection. In the future we might use it to automatically splitting of mobile-only code.
 
 ## ResponsiveProvider Props
-| Prop               | Type    | Required | Default | Description                                                                   |
+| Prop               | Type | Required | Default | Description |
 | ------------------ | ------- | ---------|---------|-------------------------------------------------------------------------------|
-| initialMediaType   | '_initial' <br>&#124;&nbsp; 'xs' <br>&#124;&nbsp; 'sm' <br>&#124;&nbsp; 'md' <br>&#124;&nbsp; 'lg'  <br>&#124;&nbsp;  'xl'| no    | 'xs'       |  Initial media type before the calculation of the real measures  |
-| defaultOrientation | 'landscape' <br>&#124;&nbsp; 'portrait'  | no    | null       | Initial orientation before the calculation of the real measures    |
-| children           | node  | yes     | -       | React component |
-| breakpoints        | { xs: string, sm: string, md: string, lg: string, xl: string }  | no    | -       | Min breakpoints     |
-| breakpointsMax     | { xs: string, sm: string, md: string, lg: string, xl: string }  | no    | -       | Max breakpoints |
-| mediaQueries       | { _initial: string, xs: string, sm: string, md: string, lg: string, xl: string }  | no    | -       | Represents the screen media queries `(If this is passed, breakpoints and breakpointsMax props are obsolete)`  |
-| mobileBreakpoint   | '_initial' <br>&#124;&nbsp; 'xs' <br>&#124;&nbsp; 'sm' <br>&#124;&nbsp; 'md' <br>&#124;&nbsp; 'lg'  <br>&#124;&nbsp;  'xl'  | no    | -       | It's considered mobile until this breakpoint |
+| initialMediaType   | string (should match breakpoints or mediaQueries key) | no | 'xs' | Initial media type before the calculation of the real measures |
+| defaultOrientation | 'landscape' <br>&#124;&nbsp; 'portrait' | no | null | Initial orientation before the calculation of the real measures |
+| children           | node | yes | - | React component |
+| breakpoints        | {[key: string]: number } | no | { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400 } | breakpoints |
+| mediaQueries       | {[key: string]: string } | no | - | Represents the screen media queries `(If this is passed, breakpoints and breakpointsMax props are obsolete)` |
+| mobileBreakpoint   | string (should match breakpoints or mediaQueries key) | no | 'md' | It's considered mobile until this breakpoint |
 
 ## Object returned by the useResponsive / withResponsive / Responsive:
 
-| Key                    | Type    | Description                                                                                  |
+| Key                    | Type | Description |
 |------------------------|---------|----------------------------------------------------------------------------------------------|
-| mediaType              | '_initial' <br>&#124;&nbsp; 'xs' <br>&#124;&nbsp; 'sm' <br>&#124;&nbsp; 'md' <br>&#124;&nbsp; 'lg'  <br>&#124;&nbsp;  'xl'  | Current breakpoint name|
-| orientation            | string  | Current browser orientation |
+| mediaType              | string | Current breakpoint name|
+| orientation            | string | Current browser orientation |
 | isCalculated           | boolean | False on first render. Once true, it means all breakpoints values are based on the window. |
-| is                     | { _initial: boolean, xs: boolean, sm: boolean, md: boolean, lg: boolean, xl: boolean }  | Object key breakpoint name and value boolean that shows if width is at a certain breakpoint  |
-| lessThan               | { _initial: boolean, xs: boolean, sm: boolean, md: boolean, lg: boolean, xl: boolean }  | Object key breakpoint name and value boolean that shows if width is less than a certain breakpoint |
-| greaterThan               | { _initial: boolean, xs: boolean, sm: boolean, md: boolean, lg: boolean, xl: boolean }  | Object key breakpoint name and value boolean that shows if width is greater than a certain breakpoint |
+| is                     | {[key: string]: boolean } | Object key breakpoint name and value boolean that shows if width is at a certain breakpoint |
+| lessThan               | {[key: string]: boolean } | Object key breakpoint name and value boolean that shows if width is less than a certain breakpoint |
+| greaterThan               | {[key: string]: boolean } | Object key breakpoint name and value boolean that shows if width is greater than a certain breakpoint |
 
 ## Object returned by the useIsMobile / withIsMobile:
 
-| Key                    | Type    | Description                                                                                  |
-|------------------------|---------|----------------------------------------------------------------------------------------------|
+| Key | Type | Description |
+|--------------|---------|----------------------------------------------------------------------------------------------|
 | isMobile | boolean | If it's below the mobile breakpoint defined by mobileBreakpoint |
-| isCalculated           | boolean | False on first render. Once true, it means all breakpoints values are based on the window. |
+| isCalculated | boolean | False on first render. Once true, it means all breakpoints values are based on the window. |
    
 ## Usage and examples
 
@@ -78,30 +78,22 @@ The component has five different exported consumption APIs:
 - `withResponsive`: A HoC which passes the responsive data to the `responsive` prop
 - `withIsMobile`: A HoC which passes `isMobile` and `isCalculated` props only
 
-### How to setup
+### How to set up
 
 There are two possible options to configure your responsive provider with `breakpoints` or with `mediaQueries`
 
 Using `breakpoints` and `breakpointsMax`
 ```js
 const breakpoints = {
-  xs: "320px",
-  sm: "576px",
-  md: "960px",
-  lg: "1280px",
-  xl: "1800px"
-};
-
-const breakpointsMax = {
-  xs: "319px",
-  sm: "575px",
-  md: "959px",
-  lg: "1279px",
-  xl: "1799px"
+  xs: 0,
+  sm: 576,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1400,
 };
 
 const App = () => {
-    
     return (
         <ResponsiveProvider breakpoints={breakpoints} breakpointsMax={breakpointsMax}>
             <Content />
@@ -115,16 +107,15 @@ export default App;
 Using `mediaQueries`
 ```js
 const mediaQueries = {
-  _initial: "(min-width: 0px) and (max-width: 319px)",
-  xs: "(min-width: 320px) and (max-width: 575px)",
-  sm: "(min-width: 576px) and (max-width: 959px)",
-  md: "(min-width: 960px) and (max-width: 1279px)",
-  lg: "(min-width: 1280px) and (max-width: 1799px)",
-  xl: "(min-width: 1800px)"
+  xs: "(min-width: 0) and (max-width: 575px)",
+  sm: "(min-width: 576px) and (max-width: 767px)",
+  md: "(min-width: 768px) and (max-width: 991px)",
+  lg: "(min-width: 992px) and (max-width: 1199px)",
+  xl: "(min-width: 1200px) and (max-width: 1399px)",
+  xxl: "(min-width: 1400px)"
 };
 
 const App = () => {
-    
     return (
         <ResponsiveProvider mediaQueries={mediaQueries}>
             <Content />
@@ -217,18 +208,6 @@ class Greetings extends Component {
 export default withIsMobile(Greetings);
 ```
 
-## Additional notes
-
-### The `_initial` media type
-
-The gap between window width 0 and the first breakpoint is called `_initial` media type.
-
-It fixes a problem at `redux-responsive` in the calculation: 
-
-If the first breakpoint starts in a number bigger than 0 (let's call it X), it considers that everything between 0 and X as the first breakpoint when it's not true.
-
-For example, our breakpoints start at 320 (XS), `redux-responsive` considers 270 as XS, a wrong calculation. We call it `_initial`.
-
 ## React compatibility
 
 React >= `16.8.0` is required to use this package as the `ResponsiveProvider` is hook-based. 
@@ -241,7 +220,7 @@ Read the [Contributing guidelines](./docs/CONTRIBUTING.md)
 
 ### Disclaimer
 
-By sending us your contributions, you are agreeing that your contribution is made subject to the terms of our [Contributor Ownership Statement](https://github.com/Farfetch/.github/blob/master/COS.md)
+By sending us your contributions, you agree that your contribution is made subject to the terms of our [Contributor Ownership Statement](https://github.com/ramirezcgn/.github/blob/master/COS.md)
 
 ## Maintainers
 

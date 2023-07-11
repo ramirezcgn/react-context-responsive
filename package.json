@@ -1,7 +1,7 @@
 {
-  "name": "@farfetch/react-context-responsive",
-  "version": "1.5.0",
-  "description": "A responsive API using React's Context API",
+  "name": "@ramirezcgn/react-context-responsive",
+  "version": "1.4.0",
+  "description": "Fork of react-context-responsive, a responsive API using React's Context API",
   "license": "MIT",
   "keywords": [
     "react",
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Farfetch/react-context-responsive.git"
+    "url": "https://github.com/ramirezcgn/react-context-responsive.git"
   },
   "scripts": {
     "test": "jest",

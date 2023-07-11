@@ -1,4 +1,4 @@
-import { getBreakpoints, getMediaqueries, getQueriesObjects } from '../utils';
+import { getBreakpoints, getMediaQueries, getQueriesObjects } from '../utils';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef } from 'react';
 import ResponsiveContext from '../ResponsiveContext';
@@ -11,25 +11,20 @@ const ResponsiveProvider = ({
     defaultOrientation,
     children,
     breakpoints,
-    breakpointsMax,
     mediaQueries,
     mobileBreakpoint,
 }) => {
-    const breakpointsWithInitialValue = {
-        _initial: '0em',
-        ...breakpoints,
-    };
-
-    const breakpointNames = Object.keys(
-        mediaQueries || breakpointsWithInitialValue
-    );
+    let breakpointNames;
 
     if (!mediaQueries) {
-        mediaQueries = getMediaqueries(
-            breakpointsWithInitialValue,
-            breakpointsMax,
+        breakpointNames = Object.entries(breakpoints)
+            .sort((a, b) => a[1] - b[1]).map(x => x[0])
+        mediaQueries = getMediaQueries(
+            breakpoints,
             breakpointNames
         );
+    } else {
+        breakpointNames = Object.keys(mediaQueries);
     }
 
     const breakpointsRef = useRef(
@@ -74,41 +69,30 @@ const ResponsiveProvider = ({
     );
 };
 
-const breakpointsPropTypes = {
-    xs: PropTypes.string,
-    sm: PropTypes.string,
-    md: PropTypes.string,
-    lg: PropTypes.string,
-    xl: PropTypes.string,
-};
-
 ResponsiveProvider.defaultProps = {
     initialMediaType: 'xs',
     defaultOrientation: null,
     mobileBreakpoint: 'md',
+    breakpoints: {
+        xs: 0,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200,
+        xxl: 1400,
+    },
 };
 
 ResponsiveProvider.propTypes = {
-    initialMediaType: PropTypes.oneOf([
-        '_initial',
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-    ]),
+    initialMediaType: PropTypes.string,
     defaultOrientation: PropTypes.oneOf(['landscape', 'portrait']),
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node,
     ]).isRequired,
-    breakpoints: PropTypes.exact(breakpointsPropTypes),
-    breakpointsMax: PropTypes.exact(breakpointsPropTypes),
-    mediaQueries: PropTypes.exact({
-        ...breakpointsPropTypes,
-        _initial: PropTypes.string,
-    }),
-    mobileBreakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+    breakpoints: PropTypes.objectOf(PropTypes.number),
+    mediaQueries: PropTypes.objectOf(PropTypes.string),
+    mobileBreakpoint: PropTypes.string,
 };
 
 export default ResponsiveProvider;

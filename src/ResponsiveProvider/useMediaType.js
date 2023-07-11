@@ -23,7 +23,11 @@ const useMediaType = (breakpointsRef, initialMediaType) => {
                         setCurrentMediaType(breakpoints[index].mediaType);
                 };
 
-                mediaQueryList.addListener(listener);
+                try {
+                    mediaQueryList.addEventListener('change', listener);
+                } catch (_) {
+                    mediaQueryList.addListener(listener);
+                }
 
                 return [mediaQueryList, listener];
             }
@@ -32,7 +36,11 @@ const useMediaType = (breakpointsRef, initialMediaType) => {
         return () => {
             mediaQueryListsAndListeners.forEach(
                 ([mediaQueryList, listener]) => {
-                    mediaQueryList.removeListener(listener);
+                    try {
+                        mediaQueryList.removeEventListener('change', listener);
+                    } catch (_) {
+                        mediaQueryList.removeListener(listener);
+                    }
                 }
             );
         };

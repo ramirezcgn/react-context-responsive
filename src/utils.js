@@ -37,34 +37,30 @@ export const getQueriesObjects = (currentBreakpointName, breakpoints) => {
     }, defaultQueryObject);
 };
 
-export const getBreakpoints = (mediaQueries, breakpointNames) => {
-    return breakpointNames.map((breakpointName, index) => {
-        return {
-            mediaType: breakpointName,
-            mediaQuery: mediaQueries[breakpointName],
-            greaterThan: breakpointNames.filter(
-                (_gtName, gtIndex) => gtIndex < index
-            ),
-            lessThan: breakpointNames.filter(
-                (_ltName, ltIndex) => ltIndex > index
-            ),
-        };
-    }, {});
-};
+export const getBreakpoints = (mediaQueries, breakpointNames) => (
+    breakpointNames.map((breakpointName, index) => ({
+        mediaType: breakpointName,
+        mediaQuery: mediaQueries[breakpointName],
+        greaterThan: breakpointNames.filter(
+            (_gtName, gtIndex) => gtIndex < index
+        ),
+        lessThan: breakpointNames.filter(
+            (_ltName, ltIndex) => ltIndex > index
+        ),
+    }), {})
+);
 
-export const getMediaqueries = (breakpoints, breakpointsMax, breakpointNames) =>
+export const getMediaQueries = (breakpoints, breakpointNames) =>
     breakpointNames.reduce(
         (acc, breakpointName, index) => {
             const nextBreakpointName = breakpointNames[index + 1];
-
             return {
                 ...acc,
-                [breakpointName]: `(min-width: ${breakpoints[breakpointName]})${
+                [breakpointName]: `(min-width: ${breakpoints[breakpointName]}px)${
                     nextBreakpointName
-                        ? ` and (max-width: ${breakpointsMax[nextBreakpointName]})`
+                        ? ` and (max-width: ${breakpoints[nextBreakpointName] - 1}px)`
                         : ''
                 }`,
             };
         },
-        { _initial: '(min-width: 0em)' }
     );
