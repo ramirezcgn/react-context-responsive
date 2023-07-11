@@ -104,7 +104,7 @@ const breakpoints = {
 
 const App = () => {
     return (
-        <ResponsiveProvider breakpoints={breakpoints} breakpointsMax={breakpointsMax}>
+        <ResponsiveProvider breakpoints={breakpoints}>
             <Content />
         </ResponsiveProvider>
     );
