@@ -44,7 +44,7 @@ When possible, use the `withIsMobile` and `useIsMobile` for mobile device's dete
 | initialMediaType   | string (should match breakpoints or mediaQueries key) | no | 'xs' | Initial media type before the calculation of the real measures |
 | defaultOrientation | 'landscape' <br>&#124;&nbsp; 'portrait' | no | null | Initial orientation before the calculation of the real measures |
 | children           | node | yes | - | React component |
-| breakpoints        | {[key: string]: number } | no | { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400 } | breakpoints |
+| breakpoints        | {[key: string]: number } | no | { <br>&nbsp;&nbsp;xs: 0,<br>&nbsp;&nbsp;sm: 576,<br>&nbsp;&nbsp;md: 768,<br>&nbsp;&nbsp;lg: 992,<br>&nbsp;&nbsp;xl: 1200,<br>&nbsp;&nbsp;xxl: 1400<br> } | breakpoints |
 | mediaQueries       | {[key: string]: string } | no | - | Represents the screen media queries `(If this is passed, breakpoints and breakpointsMax props are obsolete)` |
 | mobileBreakpoint   | string (should match breakpoints or mediaQueries key) | no | 'md' | It's considered mobile until this breakpoint |
 
@@ -99,7 +99,7 @@ const breakpoints = {
   small: 0,
   middle: 800,
   large: 1200,
-}
+};
 */
 
 const App = () => {
