@@ -7,12 +7,19 @@ import useMediaType from './useMediaType';
 import useOrientation from './useOrientation';
 
 const ResponsiveProvider = ({
-    initialMediaType,
-    defaultOrientation,
+    initialMediaType = 'xs',
+    defaultOrientation = null,
     children,
-    breakpoints,
+    breakpoints = {
+        xs: 0,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200,
+        xxl: 1400,
+    },
     mediaQueries,
-    mobileBreakpoint,
+    mobileBreakpoint = 'md',
 }) => {
     let breakpointNames;
 
@@ -65,20 +72,6 @@ const ResponsiveProvider = ({
             {children}
         </ResponsiveContext.Provider>
     );
-};
-
-ResponsiveProvider.defaultProps = {
-    initialMediaType: 'xs',
-    defaultOrientation: null,
-    mobileBreakpoint: 'md',
-    breakpoints: {
-        xs: 0,
-        sm: 576,
-        md: 768,
-        lg: 992,
-        xl: 1200,
-        xxl: 1400,
-    },
 };
 
 ResponsiveProvider.propTypes = {

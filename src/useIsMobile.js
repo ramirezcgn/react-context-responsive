@@ -5,10 +5,10 @@ const useIsMobile = () => {
     const { isCalculated, lessThan, mobileBreakpoint } = useResponsive();
     const isMobile = lessThan[mobileBreakpoint];
 
-    return useMemo(() => ({ isMobile, isCalculated }), [
-        isMobile,
-        isCalculated,
-    ]);
+    return useMemo(
+        () => ({ isMobile, isCalculated }),
+        [isMobile, isCalculated]
+    );
 };
 
 export default useIsMobile;
